@@ -1,0 +1,4 @@
+{ "locations": [
+    {"name":"Home Base", "x": 150, "y": 190, "depth": 0},
+    {"name":"Base 2", "x": 300, "y": 450, "depth": 0}
+]}
