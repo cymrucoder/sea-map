@@ -51,15 +51,52 @@
             var bases = values[0];
             console.log(bases);
 
-            svg.selectAll("circle")
+            svg.selectAll("base-circles")
                 .data(bases.locations)
                 .enter()
+                .filter(function(d) { return d.type == "base" })
                 .append("circle")
                 .attr('r', 20)
-                .attr('cx', d => {return d.x})
-                .attr('cy', d => {return d.y})
-                .attr("fill", "lightgray")
+                .attr('cx', d => {return (d.x + 2000) / 4})
+                .attr('cy', d => {return ((2000 - d.y) / 4)})
+                .attr("fill", "green")
                 .attr("stroke", "white");
+
+            svg.selectAll("radius-circles")
+                .data(bases.locations)
+                .enter()                
+                .filter(function(d) { return d.type == "base" })
+                .append("circle")
+                .attr('r', 500 / 4)
+                .attr('cx', d => {return (d.x + 2000) / 4})
+                .attr('cy', d => {return ((2000 - d.y) / 4)})
+                .attr("fill", "none")
+                .attr("stroke", "red");
+
+            svg.selectAll("lifepods")
+                .data(bases.locations)
+                .enter()                
+                .filter(function(d) { return d.type == "lifepod" })
+                .append("circle")
+                .attr('r', 5)
+                .attr('cx', d => {return (d.x + 2000) / 4})
+                .attr('cy', d => {return ((2000 - d.y) / 4)})
+                .attr("fill", "orange")
+                .attr("stroke", "white");
+
+            svg.selectAll("areas")
+                .data(bases.locations)
+                .enter()
+                .filter(function(d) { return d.type == "area" })
+                .append("polygon")
+                .attr("points", d => { 
+                    return d.coords.map(function (d) {
+                        return [(d.x + 2000) / 4,(2000 - d.y) / 4].join(",");
+                    }).join(" ");                    
+                 })
+                .style("fill","none")
+                .style("stroke", "orange")
+                .style("stroke-width",3);
         });
 
     </script>
