@@ -93,6 +93,17 @@
                 .attr("fill", "orange")
                 .attr("stroke", "white");
 
+            svg.selectAll("vents")
+                .data(bases.locations)
+                .enter()
+                .filter(function(d) { return d.type == "vent" })
+                .append("circle")
+                .attr('r', 5)
+                .attr('cx', d => {return (d.x + 2000) / 4})
+                .attr('cy', d => {return ((2000 - d.y) / 4)})
+                .attr("fill", "purple")
+                .attr("stroke", "white");
+
             svg.selectAll("areas")
                 .data(bases.locations)
                 .enter()
