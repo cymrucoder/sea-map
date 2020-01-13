@@ -67,7 +67,7 @@
                 .enter()                
                 .filter(function(d) { return (d.type == "base" && d.scanner != false)})
                 .append("circle")
-                .attr('r', 500 / 4)
+                .attr('r', d => {return (300 + (((d.range_upgrades != null) ? d.range_upgrades * 50 : 0))) / 4})
                 .attr('cx', d => {return (d.x + 2000) / 4})
                 .attr('cy', d => {return ((2000 - d.y) / 4)})
                 .attr("fill", "none")
