@@ -60,11 +60,20 @@
                 .attr('cx', d => {return (d.x + 2000) / 4})
                 .attr('cy', d => {return ((2000 - d.y) / 4)})
                 .attr("fill", "green")
-                .attr("stroke", "white");
+                .attr("stroke", "white")
+                .on("mouseover", function(d) {
+                    div .transition()
+                        .duration(200)
+                        .style("opacity", .99);
+
+                    div .html(d.name)
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+                });
 
             svg.selectAll("radius-circles")
                 .data(bases.locations)
-                .enter()                
+                .enter()
                 .filter(function(d) { return (d.type == "base" && d.scanner != false)})
                 .append("circle")
                 .attr('r', d => {return (300 + (((d.range_upgrades != null) ? d.range_upgrades * 50 : 0))) / 4})
@@ -75,7 +84,7 @@
 
             svg.selectAll("lifepods")
                 .data(bases.locations)
-                .enter()                
+                .enter()
                 .filter(function(d) { return d.type == "lifepod" })
                 .append("circle")
                 .attr('r', 5)
@@ -89,10 +98,10 @@
                 .enter()
                 .filter(function(d) { return d.type == "area" })
                 .append("polygon")
-                .attr("points", d => { 
+                .attr("points", d => {
                     return d.coords.map(function (d) {
                         return [(d.x + 2000) / 4,(2000 - d.y) / 4].join(",");
-                    }).join(" ");                    
+                    }).join(" ");
                  })
                 .style("fill","none")
                 .style("stroke", "orange")
