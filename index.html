@@ -65,7 +65,7 @@
             svg.selectAll("radius-circles")
                 .data(bases.locations)
                 .enter()                
-                .filter(function(d) { return d.type == "base" })
+                .filter(function(d) { return (d.type == "base" && d.scanner != false)})
                 .append("circle")
                 .attr('r', 500 / 4)
                 .attr('cx', d => {return (d.x + 2000) / 4})
