@@ -104,6 +104,17 @@
                 .attr("fill", "purple")
                 .attr("stroke", "white");
 
+            svg.selectAll("structures")
+                .data(bases.locations)
+                .enter()
+                .filter(function(d) { return d.type == "structure" })
+                .append("circle")
+                .attr('r', 5)
+                .attr('cx', d => {return (d.x + 2000) / 4})
+                .attr('cy', d => {return ((2000 - d.y) / 4)})
+                .attr("fill", "black")
+                .attr("stroke", "white");
+
             svg.selectAll("areas")
                 .data(bases.locations)
                 .enter()
